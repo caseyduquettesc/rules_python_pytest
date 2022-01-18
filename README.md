@@ -17,3 +17,25 @@ Features:
 From the release you wish to use:
 <https://github.com/caseyduquettesc/rules_python_pytest/releases>
 copy the WORKSPACE snippet into your `WORKSPACE` file.
+
+## Usage
+
+```py
+load("@caseyduquettesc_rules_python_pytest//python_pytest:defs.bzl", "py_pytest_test")
+
+py_pytest_test(
+    name = "test_w_pytest",
+    size = "small",
+    srcs = ["test.py"],
+    deps = [
+      # TODO Add this for the user
+      requirement("pytest"),
+    ],
+)
+```
+
+## Disclaimer
+
+I rely on this myself and will accept isse reports and contributions, however this doesn't have automated tests and isn't
+documented terribly well. I will maintain this, however the expectation is that this will eventually be rolled into
+`rules_python` and at that point these rules will be deprecated.
