@@ -18,12 +18,14 @@ def py_pytest_test(name, srcs, deps = [], args = [], **kwargs):
     )
     ```
     """
+    shim_label = Label("//python_pytest:pytest_shim.py")
+
     py_test(
         name = name,
         srcs = [
-            "//python_pytest:pytest_shim.py",
+            shim_label,
         ] + srcs,
-        main = "//python_pytest:pytest_shim.py",
+        main = shim_label,
         args = [
             "--capture=no",
         ] + args + ["$(location :%s)" % x for x in srcs],
