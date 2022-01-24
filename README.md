@@ -36,6 +36,6 @@ py_pytest_test(
 
 ## Disclaimer
 
-I rely on this myself and will accept isse reports and contributions, however this doesn't have automated tests and isn't
+I rely on this myself and will accept issue reports and contributions, however this doesn't have automated tests and isn't
 documented terribly well. I will maintain this, however the expectation is that this will eventually be rolled into
 `rules_python` and at that point these rules will be deprecated.
