@@ -21,7 +21,7 @@ copy the WORKSPACE snippet into your `WORKSPACE` file.
 ## Usage
 
 ```py
-load("@caseyduquettesc_rules_python_pytest//python_pytest:defs.bzl", "py_pytest_test")
+load("@rules_python_pytest//python_pytest:defs.bzl", "py_pytest_test")
 
 py_pytest_test(
     name = "test_w_pytest",
