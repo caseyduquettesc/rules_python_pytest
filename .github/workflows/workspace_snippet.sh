@@ -13,7 +13,7 @@ WORKSPACE snippet:
 \`\`\`starlark
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
-    name = "caseyduquettesc_rules_python_pytest",
+    name = "rules_python_pytest",
     sha256 = "${SHA}",
     strip_prefix = "${PREFIX}",
     url = "https://github.com/caseyduquettesc/rules_python_pytest/archive/${TAG}.tar.gz",
@@ -24,7 +24,7 @@ http_archive(
 # you should fetch it *before* calling this.
 # Alternatively, you can skip calling this function, so long as you've
 # already fetched all the dependencies.
-load("@caseyduquettesc_rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
+load("@rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
 rules_python_pytest_dependencies()
 
 \`\`\`
