@@ -9,6 +9,9 @@ import pytest
 if __name__ == "__main__":
     pytest_args = ["--ignore=external"]
 
+    if os.environ.get("XML_OUTPUT_FILE"):
+        pytest_args.append("--junitxml={xml_output_file}".format(xml_output_file=os.environ.get("XML_OUTPUT_FILE")))
+
     if os.environ.get("TESTBRIDGE_TEST_ONLY"):
         # TestClass.test_fn -> TestClass::test_fn
         module_name = os.environ.get("TESTBRIDGE_TEST_ONLY").replace(".", "::")
