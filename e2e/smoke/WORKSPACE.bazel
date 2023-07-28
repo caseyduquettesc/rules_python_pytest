@@ -13,12 +13,6 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.17.3.tar.gz",
 )
 
-#---SNIP--- Below here is re-used in the workspace snippet published on releases
-
-load("@rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
-
-rules_python_pytest_dependencies()
-
 load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
 
 py_repositories()
@@ -64,3 +58,9 @@ load("@pip//:requirements.bzl", "install_deps")
 
 # Initialize repositories for all packages in requirements_lock.txt.
 install_deps()
+
+#---SNIP--- Below here is re-used in the workspace snippet published on releases
+
+load("@rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
+
+rules_python_pytest_dependencies()
