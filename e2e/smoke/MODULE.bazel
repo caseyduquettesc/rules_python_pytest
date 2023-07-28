@@ -8,14 +8,6 @@ local_path_override(
 )
 
 # Pretty much copied from https://github.com/bazelbuild/rules_python/releases/tag/0.17.3
-pip = use_extension("@rules_python//python:extensions.bzl", "pip")
-pip.parse(
-    name = "pip",
-    requirements_lock = "//:requirements.txt",
-)
-use_repo(pip, "pip")
-
-# Register a specific python toolchain instead of using the host version
 python = use_extension("@rules_python//python:extensions.bzl", "python")
 python.toolchain(
     name = "python3_9",
@@ -26,3 +18,10 @@ use_repo(python, "python3_9_toolchains")
 register_toolchains(
     "@python3_9_toolchains//:all",
 )
+
+pip = use_extension("@rules_python//python:extensions.bzl", "pip")
+pip.parse(
+    name = "pip",
+    requirements_lock = "//:requirements.txt",
+)
+use_repo(pip, "pip")
