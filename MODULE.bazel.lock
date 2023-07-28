@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 1,
-  "moduleFileHash": "bac8089fdea8d879143d236444a066fc0dd6bc9eba8dc6205c1f1725f4eb6325",
+  "moduleFileHash": "0e93aa6b28255a0567b3e29e9e17927aa9bc6973a33962348884210fe3889d5f",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -20,7 +20,7 @@
       "name": "com_github_caseyduquettesc_rules_python_pytest",
       "version": "0.0.0",
       "key": "<root>",
-      "repoName": "com_github_caseyduquettesc_rules_python_pytest",
+      "repoName": "rules_python_pytest",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [],
       "extensionUsages": [],

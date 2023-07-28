@@ -10,7 +10,6 @@ py_pytest_test(
     name = "test_w_pytest",
     size = "small",
     srcs = ["test.py"],
-    tags = ["manual"],
     deps = [
         requirement("pytest"),
     ],
