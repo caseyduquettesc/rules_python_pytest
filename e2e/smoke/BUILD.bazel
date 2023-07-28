@@ -3,15 +3,22 @@ Add a basic smoke-test target below.
 """
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-# load("com_myorg_rules_mylang//mylang:defs.bzl", "...")
+load("@rules_python_pytest//python_pytest:defs.bzl", "py_pytest_test")
+load("@pip//:requirements.bzl", "requirement")
 
-# Replace with a usage of your rule/macro
-filegroup(name = "empty")
+py_pytest_test(
+    name = "test_w_pytest",
+    size = "small",
+    srcs = ["test.py"],
+    tags = ["manual"],
+    deps = [
+        requirement("pytest"),
+    ],
+)
 
 build_test(
     name = "smoke_test",
     targets = [
-        # targets you add above
-        ":empty",
+        ":test_w_pytest",
     ],
 )
