@@ -18,7 +18,7 @@ cat << EOF
 2. Add to your \`MODULE.bazel\` file:
 
 \`\`\`starlark
-bazel_dep(name = "com_github_caseyduquettesc_rules_python_pytest", version = "${TAG:1}")
+bazel_dep(name = "com_github_caseyduquettesc_rules_python_pytest", version = "${TAG:1}", repo_name = "rules_python_pytest")
 \`\`\`
 
 ## Using WORKSPACE
