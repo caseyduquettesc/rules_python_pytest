@@ -1,0 +1,23 @@
+"""Provides a simple way to test your rules as an external workspace.
+Add a basic smoke-test target below.
+"""
+
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load("@rules_python_pytest//python_pytest:defs.bzl", "py_pytest_test")
+load("@pip//:requirements.bzl", "requirement")
+
+py_pytest_test(
+    name = "test_w_pytest",
+    size = "small",
+    srcs = ["test.py"],
+    deps = [
+        requirement("pytest"),
+    ],
+)
+
+build_test(
+    name = "smoke_test",
+    targets = [
+        ":test_w_pytest",
+    ],
+)
