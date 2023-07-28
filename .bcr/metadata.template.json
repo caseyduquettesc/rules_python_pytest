@@ -1,0 +1,12 @@
+{
+  "homepage": "https://github.com/caseyduquettesc/rules_python_pytest",
+  "maintainers": [
+    {
+      "github": "caseyduquettesc",
+      "name": "Casey Duquette"
+    }
+  ],
+  "repository": ["github:caseyduquettesc/rules_python_pytest"],
+  "versions": [],
+  "yanked_versions": {}
+}

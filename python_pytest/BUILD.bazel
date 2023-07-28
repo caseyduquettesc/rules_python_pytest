@@ -11,7 +11,6 @@ bzl_library(
     srcs = ["repositories.bzl"],
     visibility = ["//visibility:public"],
     deps = [
-        "//python_pytest/private:versions",
         "@bazel_tools//tools/build_defs/repo:http.bzl",
         "@bazel_tools//tools/build_defs/repo:utils.bzl",
     ],
@@ -19,9 +18,17 @@ bzl_library(
 
 bzl_library(
     name = "defs",
-    srcs = ["defs.bzl"],
+    srcs = [
+        "defs.bzl",
+        "@rules_python//:bzl",
+    ],
     visibility = ["//visibility:public"],
     deps = [
-        "@rules_python//docs:defs",
     ],
+)
+
+bzl_library(
+    name = "extensions",
+    srcs = ["extensions.bzl"],
+    visibility = ["//visibility:public"],
 )

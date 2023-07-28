@@ -16,7 +16,7 @@ Features:
 
 From the release you wish to use:
 <https://github.com/caseyduquettesc/rules_python_pytest/releases>
-copy the WORKSPACE snippet into your `WORKSPACE` file.
+copy the WORKSPACE snippet into your `WORKSPACE` file or the `bazel_dep` if you use bzlmod.
 
 ## Usage
 

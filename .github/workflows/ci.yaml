@@ -7,31 +7,27 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+concurrency:
+  # Cancel previous actions from the same PR: https://stackoverflow.com/a/72408109
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Mount bazel action cache
-        uses: actions/cache@v2
-        with:
-          path: "~/.cache/bazel"
-          key: bazel
-      - name: Mount bazel repo cache
-        uses: actions/cache@v2
-        with:
-          path: "~/.cache/bazel-repo"
-          key: bazel-repo
-      - name: bazel test //...
-        env:
-          # Bazelisk will download bazel to here, ensure it is cached between runs.
-          XDG_CACHE_HOME: ~/.cache/bazel-repo
-        run: bazel --bazelrc=.github/workflows/ci.bazelrc --bazelrc=.bazelrc test //...
+    uses: bazel-contrib/.github/.github/workflows/bazel.yaml@29e53247c6366e30acbedfc767f58f79fc05836c
+    with:
+      folders: |
+        [
+          ".",
+          "e2e/smoke"
+        ]
+      exclude: |
+        [
+          {"folder": ".", "bzlmodEnabled": false},
+          {"bazelversion": "5.4.0", "bzlmodEnabled": true},
+          {"bazelversion": "5.4.0", "os": "macos-latest"},
+          {"bazelversion": "5.4.0", "os": "windows-latest"},
+        ]

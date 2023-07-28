@@ -2,7 +2,7 @@
 
 Public API
 
-<a id="#py_pytest_test"></a>
+<a id="py_pytest_test"></a>
 
 ## py_pytest_test
 

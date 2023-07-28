@@ -1,0 +1,11 @@
+# Override http_archive for local testing
+local_repository(
+    name = "rules_python_pytest",
+    path = "../..",
+)
+
+#---SNIP--- Below here is re-used in the workspace snippet published on releases
+
+load("@rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
+
+rules_python_pytest_dependencies()
