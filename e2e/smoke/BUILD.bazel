@@ -4,7 +4,7 @@ Add a basic smoke-test target below.
 
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@rules_python_pytest//python_pytest:defs.bzl", "py_pytest_test")
-load("@pypi//:requirements.bzl", "requirement")
+load("@pip//:requirements.bzl", "requirement")
 
 py_pytest_test(
     name = "test_w_pytest",

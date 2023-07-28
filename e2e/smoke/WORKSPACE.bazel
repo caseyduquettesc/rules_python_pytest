@@ -37,7 +37,7 @@ pip_parse(
     # style env vars are read, but env vars that control requests and urllib3
     # can be passed
     # environment = {"HTTPS_PROXY": "http://my.proxy.fun/"},
-    name = "pypi",
+    name = "pip",
     # (Optional) You can provide extra parameters to pip.
     # Here, make pip output verbose (this is usable with `quiet = False`).
     # extra_pip_args = ["-v"],
@@ -60,7 +60,7 @@ pip_parse(
     requirements_lock = "//:requirements.txt",
 )
 
-load("@pypi//:requirements.bzl", "install_deps")
+load("@pip//:requirements.bzl", "install_deps")
 
 # Initialize repositories for all packages in requirements_lock.txt.
 install_deps()
