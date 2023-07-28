@@ -4,6 +4,13 @@ local_repository(
     path = "../..",
 )
 
+http_archive(
+    name = "rules_python",
+    sha256 = "8c15896f6686beb5c631a4459a3aa8392daccaab805ea899c9d14215074b60ef",
+    strip_prefix = "rules_python-0.17.3",
+    url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.17.3.tar.gz",
+)
+
 #---SNIP--- Below here is re-used in the workspace snippet published on releases
 
 load("@rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
