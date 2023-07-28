@@ -1,2 +1,3 @@
 bazel-*
 .bazelrc.user
+e2e/smoke/.bazelversion
