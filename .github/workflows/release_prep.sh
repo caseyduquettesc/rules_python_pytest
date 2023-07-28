@@ -33,8 +33,6 @@ http_archive(
     strip_prefix = "${PREFIX}",
     url = "https://github.com/caseyduquettesc/rules_python_pytest/releases/download/${TAG}/${ARCHIVE}",
 )
-load("@rules_python_pytest//python_pytest:repositories.bzl", "rules_python_pytest_dependencies")
-rules_python_pytest_dependencies()
 EOF
 
 awk 'f;/--SNIP--/{f=1}' e2e/smoke/WORKSPACE.bazel
