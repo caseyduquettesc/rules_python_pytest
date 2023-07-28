@@ -21,7 +21,7 @@ register_toolchains(
 
 pip = use_extension("@rules_python//python:extensions.bzl", "pip")
 pip.parse(
-    name = "pip",
+    name = "pypi",
     requirements_lock = "//:requirements.txt",
 )
-use_repo(pip, "pip")
+use_repo(pip, "pypi")
