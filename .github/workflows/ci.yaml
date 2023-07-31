@@ -33,3 +33,7 @@ jobs:
           {"bazelversion": "6.3.0", "os": "macos-latest"},
           {"bazelversion": "6.3.0", "os": "windows-latest"},
         ]
+      include: |
+        [
+          {"bazelversion": "6.3.0", "os": "ubuntu-18.04"},
+        ]
