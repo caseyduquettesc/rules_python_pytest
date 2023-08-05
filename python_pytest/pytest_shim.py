@@ -16,6 +16,24 @@ if __name__ == "__main__":
     if os.environ.get("XML_OUTPUT_FILE"):
         pytest_args.append("--junitxml={xml_output_file}".format(xml_output_file=os.environ.get("XML_OUTPUT_FILE")))
 
+    # Handle plugins that generate reports - if they are provided with relative paths (via args),
+    # re-write it under bazel's test undeclared outputs dir.
+    if os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR"):
+        undeclared_output_dir = os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR")
+
+        # Flags that take file paths as value.
+        path_flags = [
+            "--report-log",  # pytest-reportlog
+            "--json-report-file",  # pytest-json-report
+            "--html",  # pytest-html
+        ]
+        for i, arg in enumerate(args):
+            for flag in path_flags:
+                if arg.startswith(f"{flag}="):
+                    arg_split = arg.split("=", 1)
+                    if len(arg_split) == 2 and not os.path.isabs(arg_split[1]):
+                        args[i] = f"{flag}={undeclared_output_dir}/{arg_split[1]}"
+
     if os.environ.get("TESTBRIDGE_TEST_ONLY"):
         # TestClass.test_fn -> TestClass::test_fn
         module_name = os.environ.get("TESTBRIDGE_TEST_ONLY").replace(".", "::")
