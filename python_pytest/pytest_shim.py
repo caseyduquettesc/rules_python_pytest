@@ -16,6 +16,13 @@ if __name__ == "__main__":
     if os.environ.get("XML_OUTPUT_FILE"):
         pytest_args.append("--junitxml={xml_output_file}".format(xml_output_file=os.environ.get("XML_OUTPUT_FILE")))
 
+    # Handle test sharding - requires pytest-shard plugin.
+    if os.environ.get("TEST_SHARD_INDEX") and os.environ.get("TEST_TOTAL_SHARDS"):
+        pytest_args.append("--shard-id={shard_id}".format(shard_id=os.environ.get("TEST_SHARD_INDEX")))
+        pytest_args.append("--num-shards={num_shards}".format(num_shards=os.environ.get("TEST_TOTAL_SHARDS")))
+        if os.environ.get("TEST_SHARD_STATUS_FILE"):
+            open(os.environ["TEST_SHARD_STATUS_FILE"], "a").close()
+
     # Handle plugins that generate reports - if they are provided with relative paths (via args),
     # re-write it under bazel's test undeclared outputs dir.
     if os.environ.get("TEST_UNDECLARED_OUTPUTS_DIR"):
