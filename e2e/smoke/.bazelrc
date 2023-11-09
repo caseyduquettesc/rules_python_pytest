@@ -1,0 +1,2 @@
+# Enable after bazel 5.4.0 is removed from e2e tests to verify correct implementation of sharding.
+# test --incompatible_check_sharding_support

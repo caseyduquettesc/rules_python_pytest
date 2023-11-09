@@ -34,6 +34,9 @@ py_pytest_test(
 )
 ```
 
+To use [test sharding](https://bazel.build/reference/test-encyclopedia#test-sharding), also add `requirement("pytest-shard")`
+to `deps`.
+
 ## Disclaimer
 
 I rely on this myself and will accept issue reports and contributions, however this only has a simple smoke test and isn't

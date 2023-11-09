@@ -15,6 +15,17 @@ py_pytest_test(
     ],
 )
 
+py_pytest_test(
+    name = "test_sharded",
+    size = "small",
+    srcs = ["test_sharded.py"],
+    shard_count = 2,
+    deps = [
+        requirement("pytest"),
+        requirement("pytest-shard"),
+    ],
+)
+
 build_test(
     name = "smoke_test",
     targets = [
