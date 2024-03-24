@@ -18,6 +18,18 @@ From the release you wish to use:
 <https://github.com/caseyduquettesc/rules_python_pytest/releases>
 copy the WORKSPACE snippet into your `WORKSPACE` file or the `bazel_dep` if you use bzlmod.
 
+#################################################
+
+# loadup the requirements for pytest
+load("@rules_python_pytest//python_pytest:repositories.bzl", "setup_pytest_requirements")
+# this requires you to pass in your python interpreter
+setup_pytest_requirements(interpreter = interpreter)
+load("@pytest_requirements//:requirements.bzl", "install_deps")
+install_deps()
+
+#################################################
+
+
 ## Usage
 
 ```py

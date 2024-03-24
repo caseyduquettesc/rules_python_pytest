@@ -1,7 +1,7 @@
 """Public API"""
 
 load("@rules_python//python:defs.bzl", "py_test")
-# load("@py_deps//:requirements.bzl", "requirement")
+load("@pytest_requirements//:requirements.bzl", "requirement")
 
 def py_pytest_test(name, srcs, deps = [], args = [], **kwargs):
     """Use pytest to run tests, using a wrapper script to interface with Bazel.
@@ -12,8 +12,6 @@ def py_pytest_test(name, srcs, deps = [], args = [], **kwargs):
       size = "small",
       srcs = ["test.py"],
       deps = [
-        # TODO Add this for the user
-        requirement("pytest"),
       ],
     )
     ```
@@ -31,10 +29,9 @@ def py_pytest_test(name, srcs, deps = [], args = [], **kwargs):
         ] + args + ["$(location :%s)" % x for x in srcs],
         # python_version = "PY3",
         # srcs_version = "PY3",
-        # TODO It'd be nice to implicitly include pytest, but I don't know how to know the requirements repo nme
-        # deps = deps + [
-        #     requirement("pytest"),
-        # ],
-        deps = deps,
+        deps = deps + [
+             requirement("pytest"),
+             requirement("pluggy"),
+        ],
         **kwargs
     )
