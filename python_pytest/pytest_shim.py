@@ -9,9 +9,13 @@ import pytest
 if __name__ == "__main__":
     pytest_args = ["--ignore=external"]
 
-    # pytest runs tests twice if __init__.py is passed explicitly as an argument. Remove any __init__.py file to avoid that.
+    args = sys.argv[1:]
+    # pytest < 8.0 runs tests twice if __init__.py is passed explicitly as an argument.
+    # Remove any __init__.py file to avoid that.
+    # pytest.version_tuple is available since pytest 7.0
     # https://github.com/pytest-dev/pytest/issues/9313
-    args = [arg for arg in sys.argv[1:] if arg.startswith("-") or os.path.basename(arg) != "__init__.py"]
+    if not hasattr(pytest, "version_tuple") or pytest.version_tuple < (8, 0):
+        args = [arg for arg in args if arg.startswith("-") or os.path.basename(arg) != "__init__.py"]
 
     if os.environ.get("XML_OUTPUT_FILE"):
         pytest_args.append("--junitxml={xml_output_file}".format(xml_output_file=os.environ.get("XML_OUTPUT_FILE")))
