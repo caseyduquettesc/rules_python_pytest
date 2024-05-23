@@ -6,6 +6,7 @@ See https://docs.bazel.build/versions/main/skylark/deploying.html#dependencies
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
+load("@rules_python//python:pip.bzl", "pip_parse")
 
 def http_archive(name, **kwargs):
     maybe(_http_archive, name = name, **kwargs)
@@ -33,4 +34,12 @@ def rules_python_pytest_dependencies():
         sha256 = "a30abdfc7126d497a7698c29c46ea9901c6392d6ed315171a6df5ce433aa4502",
         strip_prefix = "rules_python-0.6.0",
         url = "https://github.com/bazelbuild/rules_python/archive/0.6.0.tar.gz",
+    )
+
+def setup_pytest_requirements(interpreter):
+    pip_parse(
+        name = "pytest_requirements",
+        python_interpreter_target = interpreter,
+        quiet = False,
+        requirements_lock = "@rules_python_pytest//:e2e/smoke/requirements.txt",
     )
