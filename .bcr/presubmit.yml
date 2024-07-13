@@ -1,6 +1,8 @@
 bcr_test_module:
   module_path: "e2e/smoke"
   matrix:
+    bazel:
+      - 6.x
     # Disable debian tests because I don't think it's using the python toolchain,
     # > no such package '@[unknown repo 'pip_importlib_metadata' requested from @rules_python~0.19.0~pip~pip_pytest]//'
     # platform: ["debian10", "macos", "ubuntu2004"]
@@ -8,6 +10,7 @@ bcr_test_module:
   tasks:
     run_tests:
       name: "Run test module"
+      bazel: ${{ bazel }}
       platform: ${{ platform }}
       test_targets:
         - "//..."
