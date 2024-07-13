@@ -46,22 +46,20 @@ if __name__ == "__main__":
                         args[i] = f"{flag}={undeclared_output_dir}/{arg_split[1]}"
 
     if os.environ.get("TESTBRIDGE_TEST_ONLY"):
-        # TestClass.test_fn -> TestClass::test_fn
-        module_name = os.environ.get("TESTBRIDGE_TEST_ONLY").replace(".", "::")
+        test_filter = os.environ["TESTBRIDGE_TEST_ONLY"]
 
         # If the test filter does not start with a class-like name, then use test filtering instead
-        # --test_filter=test_fn
-        if not module_name[0].isupper():
+        if not test_filter[0].isupper():
+            # --test_filter=test_module.test_fn or --test_filter=test_module/test_file.py
             pytest_args.extend(args)
-            pytest_args.append("-k={filter}".format(filter=module_name))
+            pytest_args.append("-k={filter}".format(filter=test_filter))
         else:
             # --test_filter=TestClass.test_fn
-            # Add test filter to path-like args
             for arg in args:
                 if not arg.startswith("--"):
-                    # Maybe a src file? Add test class/method selection to it. Not sure if this will work if the
-                    # symbol can't be found in the test file.
-                    arg = "{arg}::{module_fn}".format(arg=arg, module_fn=module_name)
+                    # arg is a src file. Add test class/method selection to it.
+                    # test.py::TestClass::test_fn
+                    arg = "{arg}::{module_fn}".format(arg=arg, module_fn=test_filter.replace(".", "::"))
                 pytest_args.append(arg)
     else:
         pytest_args.extend(args)
