@@ -19,11 +19,11 @@ py_pytest_test(
     name = "test_sharded",
     size = "small",
     srcs = ["test_sharded.py"],
-    shard_count = 2,
-    deps = [
+    pytest_deps = [
         requirement("pytest"),
         requirement("pytest-shard"),
     ],
+    shard_count = 2,
 )
 
 build_test(
